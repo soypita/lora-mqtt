@@ -473,6 +473,13 @@ static void serve_reply(char *str) {
 
 			/* Skip RSSI hex */
 			str += 4;
+
+			char handle[12] = {};
+
+			memcpy(handle, str, 12);
+
+			//Skip handle value
+			str += 12;
             
             uint8_t status;
             if (!hex_to_bytesn(str, 2, &status, !is_big_endian())) {
@@ -506,7 +513,8 @@ static void serve_reply(char *str) {
             mqtt_status.rssi = rssi;
             mqtt_status.battery = 2000 + (50*(status & 0x1F));
             mqtt_status.temperature = 20*(status >> 5) - 30;
-            
+            mqtt_status.handle = handle;
+
             if (modid == UNWDS_MODULE_NOT_FOUND) {
                 strcpy(topic, "device");
                 strcat(mqtt_msg[0].name, "error");

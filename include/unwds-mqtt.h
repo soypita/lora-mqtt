@@ -45,6 +45,7 @@ typedef struct {
     int16_t rssi;
     int16_t battery;
     int16_t temperature;
+    char handle[12];
 } mqtt_status_t;
 
 extern bool mqtt_retain;

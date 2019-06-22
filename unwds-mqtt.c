@@ -193,6 +193,10 @@ void build_mqtt_message(char *msg, const mqtt_msg_t *mqtt_msg, const mqtt_status
     strcat(msg, ", \"battery\": ");
     snprintf(buf, sizeof(buf), "%d", status.battery);
     strcat(msg, buf);
+
+    strcat(msg, ", \"handle\": ");
+    snprintf(buf, sizeof(buf), "%s", status.handle);
+    strcat(msg, buf);
     
     char time[64];
     struct timeval tv;
